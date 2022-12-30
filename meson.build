@@ -31,11 +31,16 @@ nrf_sdk_inc = include_directories(
 )
 
 add_global_arguments(
-  '-DNRF52832_XXAA',
   '-DUSE_APP_CONFIG',
   '-DNRF_SD_BLE_API_VERSION=7',
   '-DSOFTDEVICE_PRESENT',
   '-DS132',
+  language : 'c'
+)
+
+add_global_link_arguments(
+  '-L' + meson.current_source_dir(),
+  '-L' + meson.current_source_dir() + '/sdk/modules/nrfx/mdk/',
   language : 'c'
 )
 

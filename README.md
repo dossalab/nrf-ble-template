@@ -11,41 +11,23 @@ export SDK_ROOT=/path/to/unzipped/sdk
 ln -s $SDK_ROOT sdk
 ```
   
-- Create a meson.build file (for example with `meson init`). Add some basic flags common for ARM compilation:
-  - Set arch and instruction set with`-mthumb -mcpu=cortex-m4` for both linker and compiler;
-  - Specify a linker sctipt with `-T` (you can use the one provided by the SDK);
+- Create a meson.build file (for example with `meson init`).
   - Set optimization level, specs, etc...
-- Include this repo with `subdir`.
+- Include this repo with `subdir`, and include the target-related options from `targets/*`
 
 Here is a complete example:
 ```
-  project('ble_blinky', 'c',
+project('ble_blinky', 'c',
   version : '0.1',
   default_options : [ 'optimization=s' ])
 
-arch_cc_linker_args = [
-  '-mthumb',
-  '-mcpu=cortex-m4',
-]
-
-arch_linker_only_args = [
-  '-specs=nano.specs',
-  '-L../nrf-sdk/sdk/modules/nrfx/mdk/',
-  '-T../nrf-sdk/sdk/config/nrf52832/armgcc/generic_gcc_nrf52.ld',
-]
-
-add_global_arguments(
-  arch_cc_linker_args,
-  language : 'c'
-)
-
-subdir('ble-template')
+subdir('nrf-ble-template/targets/nrf52832')
+subdir('nrf-ble-template')
 
 executable('ble_blinky',
            'blinky.c',
            link_with : nrf_sdk,
-           include_directories : nrf_sdk_inc,
-           link_args : [ arch_cc_linker_args, arch_linker_only_args ])
+           include_directories : nrf_sdk_inc)
 ```
 
 - Create a sample application:
@@ -104,7 +86,7 @@ int main(void)
 
 - Get yourself a working arm-gcc toolchain (e.g arm-none-eabi-gcc). You need to specify a valid cross-file with `--cross-file` while creating a build directory. You can use the one that is provided by this template if your compiler's executable name matches:
 ```
-meson build --cross-file nrf-template/scripts/arm-none-eabi.build`
+meson build --cross-file nrf-ble-template/scripts/arm-none-eabi.build`
 ninja -C build
 ```
 
