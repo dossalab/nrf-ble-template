@@ -5,8 +5,19 @@ This repository is intended to simplify development for NRF52 (most notably NRF5
 ## Usage:
 
 - Add this repo as a git subproject
-- Create a meson.build file (for example with `meson init`). Add some basic flags common for ARM compilation (most likely you will need at least `-mthumb -mcpu=cortex-m4` for both linker and compiler, also you need to specify a linker sctipt with `-T`). Include this repo with `subdir`:
+- Symlink sdk location to a file named `sdk` in the root of this repository:
+```
+export SDK_ROOT=/path/to/unzipped/sdk
+ln -s $SDK_ROOT sdk
+```
+  
+- Create a meson.build file (for example with `meson init`). Add some basic flags common for ARM compilation:
+  - Set arch and instruction set with`-mthumb -mcpu=cortex-m4` for both linker and compiler;
+  - Specify a linker sctipt with `-T` (you can use the one provided by the SDK);
+  - Set optimization level, specs, etc...
+- Include this repo with `subdir`.
 
+Here is a complete example:
 ```
   project('ble_blinky', 'c',
   version : '0.1',
@@ -89,4 +100,16 @@ int main(void)
 		sd_app_evt_wait();
 	}
 }
-`
+```
+
+- Get yourself a working arm-gcc toolchain (e.g arm-none-eabi-gcc). You need to specify a valid cross-file with `--cross-file` while creating a build directory. You can use the one that is provided by this template if your compiler's executable name matches:
+```
+meson build --cross-file nrf-template/scripts/arm-none-eabi.build`
+ninja -C build
+```
+
+- See if the build works!
+
+## Other notes
+
+`./scripts` contains a program.sh script that can help flashing the target
