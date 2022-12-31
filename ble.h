@@ -5,6 +5,7 @@
 #include <softdevice/s132/headers/ble.h>
 #include <nrf_sdh.h>
 #include <nrf_sdh_ble.h>
+#include <ble_srv_common.h>
 
 /* A tag identifying the SoftDevice BLE configuration. */
 #define BLE_C_SD_CONFIG_TAG	1
