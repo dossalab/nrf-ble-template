@@ -51,6 +51,11 @@ ret_code_t ble_c_set_min_connection_interval(unsigned val)
 ret_code_t ble_c_set_max_connection_interval(unsigned val)
 {
 	max_connection_interval = val;
+
+	if (max_connection_interval < min_connection_interval) {
+		min_connection_interval = max_connection_interval;
+	}
+
 	return update_connection_params();
 }
 
