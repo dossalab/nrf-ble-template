@@ -15,11 +15,21 @@
 
 /*
  * Source selection for low frequency clock (required for BLE)
-
+ *
  * Possible options are:
- * - NRF_CLOCK_LF_SRC_RC
- * - NRF_CLOCK_LF_SRC_XTAL - if your board has LF crystal installed
- * - NRF_CLOCK_LF_SRC_SYNTH - safe fallback, however it requires more energy
+ * - NRF_CLOCK_LF_SRC_RC    - internal RC clock, requires periodic calibration hence
+ *                            requires more energy; calibration params are set by CTIV
+ *
+ * - NRF_CLOCK_LF_SRC_XTAL  - extennal LF crystal, most powersaving option, requires
+ *                            separate crystal to be installed on the board
+ *
+ * - NRF_CLOCK_LF_SRC_SYNTH - internal clock derived from HF crystal; requires PLL to be
+ *                            running at all time, drawing much more energy (in mA range)
  */
 
-#define NRF_SDH_CLOCK_LF_SRC	NRF_CLOCK_LF_SRC_SYNTH
+#define NRF_SDH_CLOCK_LF_SRC		NRF_CLOCK_LF_SRC_RC
+#define NRF_SDH_CLOCK_LF_ACCURACY	NRF_CLOCK_LF_ACCURACY_500_PPM
+
+/* See CTIV register in "Power and clock management" in the datasheet */
+#define NRF_SDH_CLOCK_LF_RC_CTIV	16
+#define NRF_SDH_CLOCK_LF_RC_TEMP_CTIV	2
