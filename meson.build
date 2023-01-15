@@ -2,19 +2,25 @@ nrf_sdk_src = [
   'ble.c',
   'sdk/modules/nrfx/mdk/gcc_startup_nrf52.S',
   'sdk/modules/nrfx/mdk/system_nrf52.c',
+  'sdk/components/libraries/atomic/nrf_atomic.c',
   'sdk/components/libraries/util/app_error.c',
   'sdk/components/libraries/util/app_util_platform.c',
   'sdk/components/ble/common/ble_advdata.c',
   'sdk/components/ble/common/ble_srv_common.c',
+  'sdk/components/ble/common/ble_conn_state.c',
   'sdk/components/ble/nrf_ble_gatt/nrf_ble_gatt.c',
   'sdk/components/softdevice/common/nrf_sdh.c',
   'sdk/components/softdevice/common/nrf_sdh_ble.c',
   'sdk/components/libraries/experimental_section_vars/nrf_section_iter.c',
+  'sdk/components/libraries/atomic_flags/nrf_atflags.c',
+  'sdk/components/ble/ble_services/ble_bas/ble_bas.c'
 ]
 
 nrf_sdk_inc = include_directories(
   '.',
   'sdk/components/',
+  'sdk/components/libraries/atomic_flags/',
+  'sdk/components/libraries/atomic/',
   'sdk/components/libraries/util/',
   'sdk/components/libraries/log/',
   'sdk/components/libraries/log/src/',
@@ -25,6 +31,7 @@ nrf_sdk_inc = include_directories(
   'sdk/components/softdevice/s132/headers/nrf52/',
   'sdk/components/toolchain/cmsis/include/',
   'sdk/components/ble/common/',
+  'sdk/components/ble/ble_services/',
   'sdk/integration/nrfx/',
   'sdk/modules/nrfx/',
   'sdk/modules/nrfx/mdk/',

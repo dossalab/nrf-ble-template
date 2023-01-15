@@ -33,3 +33,8 @@
 /* See CTIV register in "Power and clock management" in the datasheet */
 #define NRF_SDH_CLOCK_LF_RC_CTIV	16
 #define NRF_SDH_CLOCK_LF_RC_TEMP_CTIV	2
+
+/*
+ * Enabled built-in services
+ */
+#define BLE_BAS_ENABLED 1
