@@ -26,5 +26,6 @@ ret_code_t ble_c_set_min_connection_interval(unsigned val);
 ret_code_t ble_c_set_max_connection_interval(unsigned val);
 ret_code_t ble_c_set_supervision_timeout(unsigned val);
 ret_code_t ble_c_set_slave_latency(unsigned val);
+ret_code_t ble_c_set_name(const char *name);
 
 void ble_c_init(void);
