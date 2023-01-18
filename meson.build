@@ -13,7 +13,8 @@ nrf_sdk_src = [
   'sdk/components/softdevice/common/nrf_sdh_ble.c',
   'sdk/components/libraries/experimental_section_vars/nrf_section_iter.c',
   'sdk/components/libraries/atomic_flags/nrf_atflags.c',
-  'sdk/components/ble/ble_services/ble_bas/ble_bas.c'
+  'sdk/components/ble/ble_services/ble_bas/ble_bas.c',
+  'sdk/components/ble/ble_services/ble_dis/ble_dis.c'
 ]
 
 nrf_sdk_inc = include_directories(

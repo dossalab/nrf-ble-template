@@ -38,3 +38,4 @@
  * Enabled built-in services
  */
 #define BLE_BAS_ENABLED 1
+#define BLE_DIS_ENABLED 1
