@@ -21,11 +21,12 @@
 #define BLE_C_DEFAULT_MAX_CONNECTION_INTERVAL	MSEC_TO_UNITS(500, UNIT_1_25_MS)
 #define BLE_C_DEFAULT_SUPERVISION_TIMEOUT	MSEC_TO_UNITS(4000, UNIT_1_25_MS)
 #define BLE_C_DEFAULT_SLAVE_LATENCY		0
+#define BLE_C_DEFAULT_NAME			"Generic NRF52 device"
 
 ret_code_t ble_c_set_min_connection_interval(unsigned val);
 ret_code_t ble_c_set_max_connection_interval(unsigned val);
 ret_code_t ble_c_set_supervision_timeout(unsigned val);
 ret_code_t ble_c_set_slave_latency(unsigned val);
-ret_code_t ble_c_set_name(const char *name);
 
+void ble_c_init_with_name(const char *name);
 void ble_c_init(void);

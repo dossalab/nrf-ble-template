@@ -16,8 +16,6 @@
 		} \
 	}
 
-#define BLE_C_DEFAULT_NAME "hello ble_c!"
-
 static uint16_t connection_handle = BLE_CONN_HANDLE_INVALID;
 static uint8_t advertiser_handle = BLE_GAP_ADV_SET_HANDLE_NOT_SET;
 
@@ -71,7 +69,7 @@ ret_code_t ble_c_set_slave_latency(unsigned val)
 	return update_connection_params();
 }
 
-ret_code_t ble_c_set_name(const char *name)
+static ret_code_t ble_c_set_name(const char *name)
 {
 	ble_gap_conn_sec_mode_t sec_mode;
 
@@ -154,7 +152,7 @@ static void ble_event_handler(ble_evt_t const *event, void *user)
 
 NRF_SDH_BLE_OBSERVER(ble_observer, BLE_C_OBSERVERS_PRIORITY, ble_event_handler, NULL);
 
-void ble_c_init(void)
+void ble_c_init_with_name(const char *name)
 {
 	uint32_t ram_start = 0;
 	ret_code_t err_code;
@@ -174,7 +172,7 @@ void ble_c_init(void)
 	err_code = nrf_ble_gatt_init(&gatt_handle, NULL);
 	APP_ERROR_CHECK(err_code);
 
-	ble_c_set_name(BLE_C_DEFAULT_NAME);
+	ble_c_set_name(name);
 	APP_ERROR_CHECK(err_code);
 
 	err_code = advertising_init();
@@ -182,4 +180,9 @@ void ble_c_init(void)
 
 	err_code = switch_advertiser(true);
 	APP_ERROR_CHECK(err_code);
+}
+
+void ble_c_init(void)
+{
+	ble_c_init_with_name(BLE_C_DEFAULT_NAME);
 }
