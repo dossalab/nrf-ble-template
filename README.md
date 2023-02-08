@@ -92,6 +92,26 @@ ninja -C build
 
 - See if the build works!
 
+## Github actions
+
+This repo contains Github Actions rule that simplifies setting up this template:
+
+```
+steps:
+- name: Install apt dependencies
+  run: sudo apt-get install meson ninja-build gcc-arm-none-eabi
+- name: Checkout source
+  uses: actions/checkout@v3
+  with:
+    submodules: recursive
+- name: Checkout NRF52 SDK
+  uses: dossalab/nrf-ble-template
+- name: Build
+run: |
+  meson build --cross-file=nrf-ble-template/scripts/arm-none-eabi.build
+  ninja -C build
+```
+
 ## Other notes
 
 `./scripts` contains a program.sh script that can help flashing the target
