@@ -1,0 +1,17 @@
+name: 'Clone NRF52 SDK'
+
+
+inputs:
+  NRF52_SDK_VERSION:
+    default: 17.1.0_ddde560
+  NRF52_ARCHIVE_URL:
+    default: https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sdks/nrf5/binaries/
+
+runs:
+  using: "composite"
+  steps:
+  - run: |
+      wget -P /tmp/ ${{ inputs.NRF52_ARCHIVE_URL }}nrf5_sdk_${{ inputs.NRF52_SDK_VERSION }}.zip
+      unzip /tmp/nrf5_sdk_${{ inputs.NRF52_SDK_VERSION }}.zip -d /tmp/
+      ln -s /tmp/nRF5_SDK_${{ inputs.NRF52_SDK_VERSION }} nrf-ble-template/sdk
+    shell: bash
