@@ -107,9 +107,9 @@ steps:
 - name: Checkout NRF52 SDK
   uses: dossalab/nrf-ble-template
 - name: Build
-run: |
-  meson build --cross-file=nrf-ble-template/scripts/arm-none-eabi.build
-  ninja -C build
+  run: |
+    meson build --cross-file=nrf-ble-template/scripts/arm-none-eabi.build
+    ninja -C build
 ```
 
 ## Other notes
