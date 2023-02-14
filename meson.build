@@ -71,7 +71,6 @@ nrfx_dep = declare_dependency(
     'sdk/integration/nrfx/legacy'
   ),
   compile_args: [
-    '-DNFC_PLATFORM_ENABLED',
     '-DNRF_CLOCK_ENABLED',
     '-DTIMER_ENABLED',
     '-DNRFX_TIMER_ENABLED',
@@ -99,6 +98,7 @@ nrf_nfc_dep = declare_dependency(
     'sdk/components/nfc/ndef/generic/record/',
   ),
   compile_args: [
+    '-DNFC_PLATFORM_ENABLED',
     '-DTIMER4_ENABLED=1',
     '-DNRFX_TIMER4_ENABLED=1',
     '-DNFC_NDEF_URI_MSG_ENABLED=1',
