@@ -26,8 +26,7 @@ subdir('nrf-ble-template')
 
 executable('ble_blinky',
            'blinky.c',
-           link_with : nrf_sdk,
-           include_directories : nrf_sdk_inc)
+           dependencies : nrf_sdk_dep)
 ```
 
 - Create a sample application:
@@ -91,6 +90,10 @@ ninja -C build
 ```
 
 - See if the build works!
+
+## NRFX and NFC tag emulation libraries
+
+Since not everyone may need such functionalities NRFX sources are kept separate from `nrf_sdk_dep`. You can use `nrf_nfc_dep` and `nrfx_dep` if you want to use NFC tag emulation and NRFX, respectively. That will add required sources and include directories to your build. Please note that porting such functionalities here was like a game of whack-a-mole since required flags and defines are not clearly specified (not to mention that excluding the entire source file using preprocessor is weird and senseless if that could be done on the build system side...). I'm just saying that there is a chance that you'll encounter some issues and YMMV.
 
 ## Github actions
 
