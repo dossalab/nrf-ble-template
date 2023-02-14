@@ -8,6 +8,7 @@
 #pragma once
 
 #define NRF_SDH_ENABLED			1
+#define NRF_SDH_SOC_ENABLED		1
 #define NRF_SDH_BLE_ENABLED		1
 #define NRF_BLE_GATT_ENABLED		1
 #define NRF_SDH_BLE_VS_UUID_COUNT	5
