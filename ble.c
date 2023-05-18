@@ -152,21 +152,17 @@ static void ble_event_handler(ble_evt_t const *event, void *user)
 
 NRF_SDH_BLE_OBSERVER(ble_observer, BLE_C_OBSERVERS_PRIORITY, ble_event_handler, NULL);
 
-uint16_t ble_c_create_service(ble_uuid128_t base_uuid, uint16_t service_uuid)
+unsigned ble_c_create_service(unsigned base_uuid, uint16_t service_uuid)
 {
-	ret_code_t err;
 	uint16_t handle;
+	ret_code_t err;
 
 	ble_uuid_t ble_service_uuid = {
 		.uuid = service_uuid,
-		/* .type will be filled in by sd_ble_uuid_vs_add */
+		.type = base_uuid,
 	};
 
-	err = sd_ble_uuid_vs_add(&base_uuid, &ble_service_uuid.type);
-	APP_ERROR_CHECK(err);
-
-	err = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, \
-			&ble_service_uuid, &handle);
+	err = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_service_uuid, &handle);
 	APP_ERROR_CHECK(err);
 
 	return handle;

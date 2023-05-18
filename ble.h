@@ -28,7 +28,7 @@ ret_code_t ble_c_set_max_connection_interval(unsigned val);
 ret_code_t ble_c_set_supervision_timeout(unsigned val);
 ret_code_t ble_c_set_slave_latency(unsigned val);
 
-uint16_t ble_c_create_service(ble_uuid128_t base_uuid, uint16_t service_uuid);
+unsigned ble_c_create_service(unsigned base_uuid, uint16_t service_uuid);
 
 void ble_c_init_with_name(const char *name);
 void ble_c_init(void);
